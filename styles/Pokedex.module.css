@@ -1,0 +1,31 @@
+.fondo{
+    @apply lg:h-screen h-full bg-gradient-to-r from-green-400 to-blue-500 py-20 text-gray-600 lg:px-52
+}
+
+.buscador{
+    @apply flex space-x-1.5 items-center justify-center
+}
+
+.cajaInfoPokemon{
+    @apply bg-white py-16 px-5 xl:w-1/4 w-4/5 md:w-full mx-auto rounded-2xl
+}
+
+.resumenPokemon{
+    @apply flex items-center flex-col mb-5
+}
+
+.medidasPokemon{
+    @apply grid grid-cols-3 text-center uppercase font-bold my-5
+}
+
+.habilidadesPokemon{
+    @apply font-medium 
+}
+
+.habilidad{
+    @apply font-medium text-center text-xl capitalize
+}
+
+.imagenPokemon{
+    @apply max-w-xs flex mx-auto
+}
