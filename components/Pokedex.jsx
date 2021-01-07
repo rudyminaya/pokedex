@@ -13,12 +13,40 @@ const Pokedex = () => {
         altura: "",
         imagen: "",
     })
-    const [cargando, setCargando] = useState(true)
+    const [cargando, setCargando] = useState(false)
     const [busqueda, setBusqueda] = useState(null)
 
     useEffect(() => {
+        if (!busqueda) {
+            return
+        }
+        setCargando(true)
+        fetch(`https://pokeapi.co/api/v2/pokemon/${busqueda}`)
 
+            .then(respuesta => respuesta.json())
+            .then(pokejson => {
+                let puntosBase = pokejson.stats
+                let hp = puntosBase.find((puntoBase) => puntoBase.stat.name === "hp")
+                let habilidades = pokejson.abilities.map((habilidad) => habilidad.ability.name)
 
+                let imagen = pokejson.sprites.other['official-artwork'].front_default || pokejson.sprites.other.dream_world.front_default || pokejson.sprites.front_default
+
+                setPokemon({
+                    imagen: imagen,
+                    nombre: pokejson.name,
+                    peso: pokejson.weight / 10,
+                    altura: pokejson.height,
+                    hp: hp.base_stat,
+                    tipo: pokejson.types[0].type.name,
+                    habilidades: habilidades
+                })
+                setCargando(false)
+            })
+            .catch(error => {
+                console.log('no encontré el pokemon', error)
+                setCargando(false)
+            })
+        //2do parametro del useEffect,[valor reactivo]
     }, [busqueda])
 
     return (

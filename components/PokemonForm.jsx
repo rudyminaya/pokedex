@@ -6,7 +6,10 @@ function PokemonForm(props) {
 
     const handleSubmit = event => {
         event.preventDefault()
-        props.buscar(pokemon)
+        var pokemonLimpio = pokemon
+        pokemonLimpio = pokemonLimpio.toLowerCase()
+        pokemonLimpio = pokemonLimpio.trim()
+        props.buscar(pokemonLimpio)
     }
 
     return (
